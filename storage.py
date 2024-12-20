@@ -7,7 +7,7 @@ class Storage:
     #Create the storage (.db file) by passing it a path.
     def __init__(self):
         # self.filename = str(Path.home()) + "/.todo-storage.db"
-        self.filename = "./todo-storage.db"
+        self.filename = str(Path.home()) + "/.todo-storage.db"
     # The function to cr    eate the database with a given file name or to connect to a database
     # with a filename.
     def create_database(self):
@@ -57,7 +57,7 @@ class Storage:
             cursor.execute("SELECT * FROM todos WHERE tid=" + str(tid))
             current_info = list(cursor.fetchone())
             current_info.pop(0)
-            click.echo(f"current info is...{current_info}")
+            # click.echo(f"current info is...{current_info}")
             if name == "":
                 namestatement = ""
                 cursor.execute("SELECT name FROM todos WHERE tid=" + str(tid))
@@ -86,7 +86,7 @@ class Storage:
             # click.echo(update_statement)
             cursor.execute("SELECT * FROM todos WHERE tid=" + str(tid))
             row_update = [name, prio, deadline]
-            click.echo(row_update)
+            # click.echo(row_update)
             if row_update == current_info:
                 click.secho("No inputs, no update made", fg="bright_red")
 
@@ -123,7 +123,6 @@ class Storage:
             count = len(current_tids)
 
             updated_tids = [x + 1 for x in range(len(current_tids))]
-            # click.echo(f"{updated_tids} {current_tids}")
 
             #Below implement SQL statement that assigns the updated and corrected
             #Entries to the TID slot so it is consistent after deleting an entry.
